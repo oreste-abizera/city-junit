@@ -10,30 +10,36 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(MockitoJUnitRunner.class)
 public class CityUtilTest {
 
-    private double weather;
-
-    public CityUtilTest(double weather) {
-        this.weather = weather;
-    }
+    private City city = new City("Rubavu",5);
 
     public CityUtilTest() {
     }
 
-    public double getWeather() {
-        return weather;
+    public City getCity() {
+        return city;
     }
 
-    public void setWeather(double weather) {
-        this.weather = weather;
-    }
-
-    @Test
-    public void weatherSize_success(){
-        assertTrue(weather <= 40);
+    public void setCity(City city) {
+        this.city = city;
     }
 
     @Test
-    public void weatherSize_failure(City city){
-        assertTrue(weather > 40);
+    public void weatherMaxSize_success(){
+        assertTrue(city.getWeather() <= 40);
+    }
+
+    @Test
+    public void weatherMaxSize_failure(){
+        assertTrue(city.getWeather() > 40);
+    }
+
+    @Test
+    public void weatherMinSize_success(){
+        assertTrue(city.getWeather() >= 10);
+    }
+
+    @Test
+    public void weatherMinSize_failure(){
+        assertTrue(city.getWeather() < 10);
     }
 }
