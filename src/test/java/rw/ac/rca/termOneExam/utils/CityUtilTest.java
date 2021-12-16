@@ -5,41 +5,74 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 import rw.ac.rca.termOneExam.domain.City;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CityUtilTest {
 
-    private City city = new City("Rubavu",5);
+    private List<City> cities = Arrays.asList(new City("Kigali",30),new City("Rusizi",12));
 
     public CityUtilTest() {
     }
 
-    public City getCity() {
-        return city;
+    public List<City> getCities() {
+        return cities;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setCities(List<City> cities) {
+        this.cities = cities;
     }
 
     @Test
     public void weatherMaxSize_success(){
-        assertTrue(city.getWeather() <= 40);
+        for (City city:cities) {
+            assertTrue(city.getWeather() <= 40);
+        }
     }
 
     @Test
     public void weatherMaxSize_failure(){
-        assertTrue(city.getWeather() > 40);
+        for (City city:cities) {
+            assertTrue(city.getWeather() > 40);
+        }
     }
 
     @Test
     public void weatherMinSize_success(){
-        assertTrue(city.getWeather() >= 10);
+        for (City city:cities) {
+            assertTrue(city.getWeather() >= 10);
+        }
     }
 
     @Test
     public void weatherMinSize_failure(){
-        assertTrue(city.getWeather() < 10);
+        for (City city:cities) {
+            assertTrue(city.getWeather() < 10);
+        }
+    }
+
+    @Test
+    public void containsMusanzeAndKigali_success(){
+        boolean MusanzeFound = false;
+        boolean KigaliFound = false;
+        for (City city:cities) {
+            if(city.getName() == "Kigali") KigaliFound = true;
+            if(city.getName() == "Musanze") MusanzeFound = true;
+        }
+        assertTrue(MusanzeFound && KigaliFound);
+    }
+
+    @Test
+    public void containsMusanzeAndKigali_failure(){
+        boolean MusanzeFound = false;
+        boolean KigaliFound = false;
+        for (City city:cities) {
+            if(city.getName() == "Kigali") KigaliFound = true;
+            if(city.getName() == "Musanze") MusanzeFound = true;
+        }
+        assertFalse(MusanzeFound && KigaliFound);
     }
 }
